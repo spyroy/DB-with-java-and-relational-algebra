@@ -1,0 +1,14 @@
+USE `exercise2`;
+DROP procedure IF EXISTS `update_date`;
+
+DELIMITER $$
+USE `exercise2`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `update_date`(IN q_id int, IN current_d timestamp)
+BEGIN
+if q_id <> 0 then
+update queue set queue.time = current_d
+WHERE queue.queue_id = q_id;
+END IF;
+END$$
+
+DELIMITER ;

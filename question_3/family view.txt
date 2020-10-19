@@ -1,0 +1,19 @@
+USE `exercise2`;
+CREATE 
+     OR REPLACE ALGORITHM = UNDEFINED 
+    DEFINER = `root`@`localhost` 
+    SQL SECURITY DEFINER
+VIEW `family` AS
+    SELECT 
+        `doctors`.`doctor_id` AS `doctor_id`,
+        `patients`.`patient_id` AS `patient_id`,
+        `patients`.`p_f_name` AS `p_f_name`,
+        `patients`.`p_l_name` AS `p_l_name`
+    FROM
+        ((`doctors`
+        JOIN `patients`)
+        JOIN `queue_reserved`)
+    WHERE
+        ((`doctors`.`doctor_id` = `queue_reserved`.`doctor_id`)
+            AND (`patients`.`patient_id` = `queue_reserved`.`patient_id`)
+            AND (`doctors`.`d_l_name` = `patients`.`p_l_name`));

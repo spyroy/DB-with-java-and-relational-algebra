@@ -1,0 +1,8 @@
+DROP TRIGGER IF EXISTS `exercise2`.`queue_AFTER_INSERT`;
+
+DELIMITER $$
+USE `exercise2`$$
+CREATE DEFINER=`root`@`localhost` TRIGGER `queue_AFTER_INSERT` AFTER INSERT ON `queue` FOR EACH ROW BEGIN
+DELETE FROM queue_reserved WHERE queue_reserved.queue_id = new.queue_id; 
+END$$
+DELIMITER ;

@@ -1,0 +1,88 @@
+DROP DATABASE IF EXISTS exercise2;
+
+CREATE DATABASE IF NOT EXISTS exercise2;
+
+USE exercise2;
+
+# ---------------------------------------------------------------------- #
+# @author - nissan                                                #
+# ---------------------------------------------------------------------- #
+CREATE TABLE `queue_reserved` (
+    `queue_id` INTEGER  NOT NULL AUTO_INCREMENT,
+    `patient_id` INTEGER,
+    `queue_time` DATETIME,
+    `doctor_id` INTEGER,
+    CONSTRAINT `PK_ueue_reserved` PRIMARY KEY (`queue_id`)
+);
+
+CREATE TABLE `Doctors` (
+    `doctor_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `d_f_name` VARCHAR(15),
+    `d_l_name` VARCHAR(15),
+    `doctor_type` VARCHAR(15),
+    CONSTRAINT `PK_doctor_id` PRIMARY KEY (`doctor_id`)
+);
+
+CREATE TABLE `Patients` (
+    `patient_id` INTEGER NOT NULL AUTO_INCREMENT,
+    `p_f_name` VARCHAR(15),
+    `p_l_name` VARCHAR(15),
+    `gender` VARCHAR(1),
+    CONSTRAINT `PK_patient_id` PRIMARY KEY (`patient_id`)
+);
+
+CREATE TABLE `Queue` (
+    `queue_id` INTEGER PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    `time` DATETIME,
+    `p_f_name` VARCHAR(15)
+);
+
+INSERT INTO Doctors (doctor_id, d_f_name, d_l_name, doctor_type)
+VALUES(1001, 'Henry', 'Heimlich', 'thoracic');
+INSERT INTO Doctors (doctor_id, d_f_name, d_l_name, doctor_type)
+VALUES(1002, 'sigma', 'fraud', 'psychologist');
+INSERT INTO Doctors (doctor_id, d_f_name, d_l_name, doctor_type)
+VALUES(1003, 'michael', 'samuels', 'family');
+
+
+INSERT INTO Patients (patient_id, p_f_name, p_l_name, gender)
+VALUES(2001, 'robin', 'williams', 'M');
+INSERT INTO Patients (patient_id, p_f_name, p_l_name, gender)
+VALUES(2002, 'jim', 'carry', 'M');
+INSERT INTO Patients (patient_id, p_f_name, p_l_name, gender)
+VALUES(2003, 'carrie', 'fisher', 'F');
+INSERT INTO Patients (patient_id, p_f_name, p_l_name, gender)
+VALUES(2004, 'samuel', 'jackson', 'M');
+INSERT INTO Patients (patient_id, p_f_name, p_l_name, gender)
+VALUES(2005, 'jonathan', 'tolkien', 'M');
+INSERT INTO Patients (patient_id, p_f_name, p_l_name, gender)
+VALUES(2006, 'sammy', 'samuels', 'M');
+INSERT INTO Patients (patient_id, p_f_name, p_l_name, gender)
+VALUES(2007, 'john', 'doe', 'M');
+
+INSERT INTO Queue (queue_id, time, p_f_name)
+VALUES(3001, '2008-11-11  12:12:12', 'robin');
+INSERT INTO Queue (queue_id, time, p_f_name)
+VALUES(3002, '2009-11-11  12:12:12', 'carrie');
+INSERT INTO Queue (queue_id, time, p_f_name)
+VALUES(3003, '2008-11-11  11:12:12', 'jim');
+INSERT INTO Queue (queue_id, time, p_f_name)
+VALUES(3004, '2008-11-11  11:12:12', 'samuel');
+INSERT INTO Queue (queue_id, time, p_f_name)
+VALUES(3005, '2008-11-11  11:12:12', 'jonathan');
+INSERT INTO Queue (queue_id, time, p_f_name)
+VALUES(3006, '2008-11-11  11:12:12', 'sammy');
+
+
+INSERT INTO queue_reserved (queue_id, patient_id, queue_time, doctor_id)
+VALUES(3001, 2001, "2008-11-11  12:12:12",1002);
+INSERT INTO queue_reserved (queue_id, patient_id, queue_time, doctor_id)
+VALUES(3002, 2003, "2009-11-11  12:12:12",1002);
+INSERT INTO queue_reserved (queue_id, patient_id, queue_time, doctor_id)
+VALUES(3003, 2002, "2008-11-11  11:12:12",1002);
+INSERT INTO queue_reserved (queue_id, patient_id, queue_time, doctor_id)
+VALUES(3004, 2004, "2008-11-11  11:12:12",1001);
+INSERT INTO queue_reserved (queue_id, patient_id, queue_time, doctor_id)
+VALUES(3005, 2005, "2008-11-11  11:12:12",1001);
+INSERT INTO queue_reserved (queue_id, patient_id, queue_time, doctor_id)
+VALUES(3006, 2006, "2008-11-11  11:12:12",1003);
